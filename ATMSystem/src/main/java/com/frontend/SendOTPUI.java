@@ -78,7 +78,7 @@ public class SendOTPUI extends JFrame {
                 boolean otpSent = sendOTP(accountNumber);
                 if (otpSent) {
                     JOptionPane.showMessageDialog(null, "OTP has been sent to your registered phone number.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    new WithdrawWithOTPUI().setVisible(true);
+                    new OTPUI().setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Failed to send OTP. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
