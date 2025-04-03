@@ -12,8 +12,8 @@ import java.net.URL;
 
 public class DepositUI extends JFrame {
     private JLabel l1;
-    private JTextField tf1;
-    private JButton b1, b2;
+    private JTextField amountText;
+    private JButton btnexit, btndeposit;
     private String accountNumber;
     private String authToken;
 
@@ -31,18 +31,14 @@ public class DepositUI extends JFrame {
         l1 = new JLabel("Enter The Amount To Deposit");
         l1.setFont(new Font("Osward", Font.BOLD, 32));
 
-        tf1 = new JTextField(15);
-        tf1.setFont(new Font("Arial", Font.BOLD, 24));
+        amountText = new JTextField(15);
+        amountText.setFont(new Font("Arial", Font.BOLD, 24));
 
-        b1 = new JButton("Exit");
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.BLACK);
-        b1.setFont(new Font("Arial", Font.BOLD, 24));
+        btnexit = new JButton("Exit");
+        btnexit.setFont(new Font("Arial", Font.BOLD, 24));
 
-        b2 = new JButton("Deposit");
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.BLACK);
-        b2.setFont(new Font("Arial", Font.BOLD, 24));
+        btndeposit = new JButton("Deposit");
+        btndeposit.setFont(new Font("Arial", Font.BOLD, 24));
     }
 
     private void addComponentsToFrame() {
@@ -51,24 +47,24 @@ public class DepositUI extends JFrame {
         l1.setBounds(100, 50, 800, 40);
         add(l1);
 
-        tf1.setBounds(150, 200, 400, 60);
-        add(tf1);
+        amountText.setBounds(150, 200, 400, 60);
+        add(amountText);
 
-        b1.setBounds(300, 350, 150, 50);
-        add(b1);
+        btnexit.setBounds(300, 350, 150, 50);
+        add(btnexit);
 
-        b2.setBounds(500, 350, 150, 50);
-        add(b2);
+        btndeposit.setBounds(500, 350, 150, 50);
+        add(btndeposit);
     }
 
     private void addActionListeners() {
-        b1.addActionListener(new ActionListener() {
+        btnexit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 navigateToTransactions();
             }
         });
 
-        b2.addActionListener(new ActionListener() {
+        btndeposit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 processDeposit(authToken);
             }
@@ -76,7 +72,7 @@ public class DepositUI extends JFrame {
     }
 
     private void processDeposit(String authToken) {
-        String amountStr = tf1.getText();
+        String amountStr = amountText.getText();
 
         if (!amountStr.isEmpty()) {
             try {

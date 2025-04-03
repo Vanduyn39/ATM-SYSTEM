@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class EnterAmountUI extends JFrame {
     private JLabel l1, l2;
-    private JTextField tf1;
-    private JButton b1, b2;
+    private JTextField amountText;
+    private JButton btnexit, btnWithdraw;
     private String accountNumber;
     private String authToken;
 
@@ -24,17 +24,17 @@ public class EnterAmountUI extends JFrame {
         l1 = new JLabel("Enter The Amount To Withdraw");
         l1.setFont(new Font("Osward", Font.BOLD, 32));
 
-        tf1 = new JTextField(15);
-        tf1.setFont(new Font("Arial", Font.BOLD, 24));
+        amountText = new JTextField(15);
+        amountText.setFont(new Font("Arial", Font.BOLD, 24));
 
         l2 = new JLabel("Enter multiples of 50.000");
         l2.setFont(new Font("Arial", Font.ITALIC, 18));
 
-        b1 = new JButton("Exit");
-        b1.setFont(new Font("Arial", Font.BOLD, 24));
+        btnexit = new JButton("Exit");
+        btnexit.setFont(new Font("Arial", Font.BOLD, 24));
 
-        b2 = new JButton("Withdraw");
-        b2.setFont(new Font("Arial", Font.BOLD, 24));
+        btnWithdraw = new JButton("Withdraw");
+        btnWithdraw.setFont(new Font("Arial", Font.BOLD, 24));
     }
 
     private void addComponentsToFrame() {
@@ -43,24 +43,24 @@ public class EnterAmountUI extends JFrame {
         l1.setBounds(100, 50, 800, 40);
         add(l1);
 
-        tf1.setBounds(150, 200, 400, 60);
-        add(tf1);
+        amountText.setBounds(150, 200, 400, 60);
+        add(amountText);
 
-        b1.setBounds(300, 350, 150, 50);
-        add(b1);
+        btnexit.setBounds(300, 350, 150, 50);
+        add(btnexit);
 
-        b2.setBounds(500, 350, 150, 50);
-        add(b2);
+        btnWithdraw.setBounds(500, 350, 150, 50);
+        add(btnWithdraw);
     }
 
     private void addActionListeners() {
-        b1.addActionListener(ae -> {
+        btnexit.addActionListener(ae -> {
             new CashWithdrawUI(accountNumber, authToken).setVisible(true);
             dispose();
         });
 
-        b2.addActionListener(ae -> {
-            String inputAmount = tf1.getText().trim();
+        btnWithdraw.addActionListener(ae -> {
+            String inputAmount = amountText.getText().trim();
             try {
                 double amount = Double.parseDouble(inputAmount);
                 if (amount > 0 && amount % 50000 == 0) {

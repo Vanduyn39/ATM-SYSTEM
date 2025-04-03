@@ -15,9 +15,9 @@ import java.util.Scanner;
 
 public class LoginUI extends JFrame {
     private JLabel l1, l2, l3;
-    private JTextField tf1;
-    private JPasswordField pf2;
-    private JButton b1, b2, b3;
+    private JTextField accountNum;
+    private JPasswordField passwordText;
+    private JButton btnSignIn, btnClear, btnOTP;
 
     public LoginUI() {
         setTitle("LOGIN ACCOUNT");
@@ -34,29 +34,23 @@ public class LoginUI extends JFrame {
         l2 = new JLabel("Account Number:");
         l2.setFont(new Font("Raleway", Font.BOLD, 22));
 
-        tf1 = new JTextField(15);
-        tf1.setFont(new Font("Arial", Font.BOLD, 14));
+        accountNum = new JTextField(15);
+        accountNum.setFont(new Font("Arial", Font.BOLD, 14));
 
         l3 = new JLabel("PIN:");
         l3.setFont(new Font("Raleway", Font.BOLD, 22));
 
-        pf2 = new JPasswordField(15);
-        pf2.setFont(new Font("Arial", Font.BOLD, 14));
+        passwordText = new JPasswordField(15);
+        passwordText.setFont(new Font("Arial", Font.BOLD, 14));
 
-        b1 = new JButton("Sign In");
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.BLACK);
-        b1.setFont(new Font("Arial", Font.BOLD, 20));
+        btnSignIn = new JButton("Sign In");
+        btnSignIn.setFont(new Font("Arial", Font.BOLD, 20));
 
-        b2 = new JButton("Clear");
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.BLACK);
-        b2.setFont(new Font("Arial", Font.BOLD, 20));
+        btnClear = new JButton("Clear");
+        btnClear.setFont(new Font("Arial", Font.BOLD, 20));
 
-        b3 = new JButton("Withdraw by OTP");
-        b3.setBackground(Color.BLACK);
-        b3.setForeground(Color.BLACK);
-        b3.setFont(new Font("Arial", Font.BOLD, 20));
+        btnOTP = new JButton("Withdraw by OTP");
+        btnOTP.setFont(new Font("Arial", Font.BOLD, 20));
     }
 
     private void addComponentsToFrame() {
@@ -68,41 +62,41 @@ public class LoginUI extends JFrame {
         l2.setBounds(100, 175, 300, 30);
         add(l2);
 
-        tf1.setBounds(375, 175, 230, 40);
-        add(tf1);
+        accountNum.setBounds(375, 175, 230, 40);
+        add(accountNum);
 
         l3.setBounds(100, 270, 300, 30);
         add(l3);
 
-        pf2.setBounds(375, 270, 230, 40);
-        add(pf2);
+        passwordText.setBounds(375, 270, 230, 40);
+        add(passwordText);
 
-        b1.setBounds(175, 350, 150, 50);
-        add(b1);
+        btnSignIn.setBounds(175, 350, 150, 50);
+        add(btnSignIn);
 
-        b2.setBounds(375, 350, 150, 50);
-        add(b2);
+        btnClear.setBounds(375, 350, 150, 50);
+        add(btnClear);
 
-        b3.setBounds(200, 420, 300, 50);
-        add(b3);
+        btnOTP.setBounds(200, 420, 300, 50);
+        add(btnOTP);
     }
 
     private void addActionListeners() {
-        b1.addActionListener(new ActionListener() {
+        btnSignIn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 handleLogin();
             }
         });
 
-        b2.addActionListener(new ActionListener() {
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 clearFields();
             }
         });
-        b3.addActionListener(new ActionListener() {
+        btnOTP.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
 
-                new WithdrawWithOTPUI().setVisible(true);
+                new SendOTPUI().setVisible(true);
                 dispose();
 
             }
@@ -110,8 +104,8 @@ public class LoginUI extends JFrame {
     }
 
     private void handleLogin() {
-        String accountNumber = tf1.getText();
-        String pin = new String(pf2.getPassword());
+        String accountNumber = accountNum.getText();
+        String pin = new String(passwordText.getPassword());
 
         try {
             URL url = new URL("http://localhost:8080/api/transactions/login");
@@ -155,8 +149,8 @@ public class LoginUI extends JFrame {
     }
 
     private void clearFields() {
-        tf1.setText("");
-        pf2.setText("");
+        accountNum.setText("");
+        passwordText.setText("");
     }
 
     private void configureFrame() {

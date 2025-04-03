@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class TransactionsUI extends JFrame {
 
     private JLabel l1;
-    private JButton b1, b2, b3, b4, b5, b6;
+    private JButton btnWithdraw, btnBalance, btnTransfer, btnDeposit, btnPin, btnOut;
     private String accountNumber;
     private String authToken;
 
@@ -25,20 +25,20 @@ public class TransactionsUI extends JFrame {
         l1.setFont(new Font("Osward", Font.BOLD, 32));
         l1.setBounds(100, 50, 700, 50);
 
-        b1 = createButton("Cash Withdrawal");
-        b2 = createButton("View Balance");
-        b3 = createButton("Transfer");
-        b4 = createButton("Deposit");
-        b5 = createButton("Pin Change");
-        b6 = createButton("Log Out");
+        btnWithdraw = createButton("Cash Withdraw");
+        btnBalance = createButton("View Balance");
+        btnTransfer = createButton("Transfer");
+        btnDeposit = createButton("Deposit");
+        btnPin = createButton("Pin Change");
+        btnOut = createButton("Log Out");
 
         setLayout(null);
-        addButton(b1, 50, 175);
-        addButton(b2, 50, 275);
-        addButton(b3, 50, 375);
-        addButton(b4, 400, 175);
-        addButton(b5, 400, 275);
-        addButton(b6, 400, 375);
+        addButton(btnWithdraw, 50, 175);
+        addButton(btnBalance, 50, 275);
+        addButton(btnTransfer, 50, 375);
+        addButton(btnDeposit, 400, 175);
+        addButton(btnPin, 400, 275);
+        addButton(btnOut, 400, 375);
 
         add(l1);
 
@@ -58,42 +58,42 @@ public class TransactionsUI extends JFrame {
         return button;
     }
     private void addEventListeners() {
-        b1.addActionListener(new ActionListener() {
+        btnWithdraw.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 new CashWithdrawUI(accountNumber,authToken).setVisible(true);
                 dispose();
             }
         });
 
-        b2.addActionListener(new ActionListener() {
+        btnBalance.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 new ViewBalanceUI(accountNumber, authToken).setVisible(true);
                 dispose();
             }
         });
 
-        b3.addActionListener(new ActionListener() {
+        btnTransfer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 new TransferUI(accountNumber,authToken).setVisible(true);  // Assuming TransferUI is implemented
                 dispose();
             }
         });
 
-        b4.addActionListener(new ActionListener() {
+        btnDeposit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 new DepositUI(accountNumber,authToken).setVisible(true);
                 dispose();
             }
         });
 
-        b5.addActionListener(new ActionListener() {
+        btnPin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 new PinChangeUI(accountNumber,authToken).setVisible(true);
                 dispose();
             }
         });
 
-        b6.addActionListener(new ActionListener() {
+        btnOut.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 new LoginUI().setVisible(true);  // Log out and go back to login screen
                 dispose();

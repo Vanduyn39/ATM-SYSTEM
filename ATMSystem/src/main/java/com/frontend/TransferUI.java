@@ -13,8 +13,8 @@ import java.net.URL;
 
 public class TransferUI extends JFrame {
     private JLabel l1, l2, l3;
-    private JButton b1, b2;
-    private JTextField tf1,tf2;
+    private JButton btnexit, btnTransfer;
+    private JTextField accountNumText,amountText;
     private String accountNumber;
     private String authToken;
     public TransferUI(String accountNumber,String authToken) {
@@ -32,24 +32,20 @@ public class TransferUI extends JFrame {
         l2 = new JLabel("Account Number:");
         l2.setFont(new Font("Raleway", Font.BOLD, 22));
 
-        tf1 = new JTextField(15);
-        tf1.setFont(new Font("Arial", Font.BOLD, 24));
+        accountNumText = new JTextField(15);
+        accountNumText.setFont(new Font("Arial", Font.BOLD, 24));
 
         l3 = new JLabel("Amount:");
         l3.setFont(new Font("Raleway", Font.BOLD, 22));
 
-        tf2 = new JTextField(15);
-        tf2.setFont(new Font("Arial", Font.BOLD, 24));
+        amountText = new JTextField(15);
+        amountText.setFont(new Font("Arial", Font.BOLD, 24));
 
-        b1 = new JButton("Exit");
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.BLACK);
-        b1.setFont(new Font("Arial", Font.BOLD, 24));
+        btnexit = new JButton("Exit");
+        btnexit.setFont(new Font("Arial", Font.BOLD, 24));
 
-        b2 = new JButton("Transfer");
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.BLACK);
-        b2.setFont(new Font("Arial", Font.BOLD, 24));
+        btnTransfer = new JButton("Transfer");
+        btnTransfer.setFont(new Font("Arial", Font.BOLD, 24));
     }
 
     private void addComponentsToFrame() {
@@ -61,20 +57,20 @@ public class TransferUI extends JFrame {
         l2.setBounds(100, 175, 300, 30);
         add(l2);
 
-        tf1.setBounds(375, 175, 230, 40);
-        add(tf1);
+        accountNumText.setBounds(375, 175, 230, 40);
+        add(accountNumText);
 
         l3.setBounds(100, 270, 300, 30);
         add(l3);
 
-        tf2.setBounds(375, 270, 230, 40);
-        add(tf2);
+        amountText.setBounds(375, 270, 230, 40);
+        add(amountText);
 
-        b1.setBounds(300, 350, 150, 50);
-        add(b1);
+        btnexit.setBounds(300, 350, 150, 50);
+        add(btnexit);
 
-        b2.setBounds(500, 350, 150, 50);
-        add(b2);
+        btnTransfer.setBounds(500, 350, 150, 50);
+        add(btnTransfer);
     }
     private void configureFrame() {
         setSize(700, 600);
@@ -84,7 +80,7 @@ public class TransferUI extends JFrame {
     }
     private void addActionListeners() {
         // Exit button functionality
-        b1.addActionListener(new ActionListener() {
+        btnexit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new TransactionsUI(accountNumber,authToken).setVisible(true);
                 dispose();
@@ -92,11 +88,11 @@ public class TransferUI extends JFrame {
         });
 
         // Transfer button functionality
-        b2.addActionListener(new ActionListener() {
+        btnTransfer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String receiverAccountNumber = tf1.getText();
-                String amount = tf2.getText();
+                String receiverAccountNumber = accountNumText.getText();
+                String amount = amountText.getText();
 
                 // Simple validation
                 if (receiverAccountNumber.isEmpty() || amount.isEmpty()) {
@@ -115,6 +111,8 @@ public class TransferUI extends JFrame {
                     boolean success = callTransferAPI(receiverAccountNumber, transferAmount);
                     if (success) {
                         JOptionPane.showMessageDialog(null, "Transfer successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        new TransactionsUI(accountNumber,authToken).setVisible(true);
+                        dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Transfer failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                     }

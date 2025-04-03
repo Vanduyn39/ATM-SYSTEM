@@ -9,7 +9,7 @@ public class
 CashWithdrawUI extends JFrame {
 
     private JLabel l1;
-    private JButton b1, b2, b3, b4, b5, b6, b7;
+    private JButton btn500, btn1000, btn2000, btn3000, btn5000, btnenterAmount, btnexit;
     private String accountNumber;
     private String authToken;
 
@@ -28,13 +28,13 @@ CashWithdrawUI extends JFrame {
         l1.setForeground(Color.BLACK);
         l1.setFont(new Font("Osward", Font.BOLD, 32));
 
-        b1 = createButton("500.000");
-        b2 = createButton("1.000.000");
-        b3 = createButton("2.000.000");
-        b4 = createButton("3.000.000");
-        b5 = createButton("5.000.000");
-        b6 = createButton("Enter Amount");
-        b7 = createButton("Exit");
+        btn500 = createButton("500.000");
+        btn1000 = createButton("1.000.000");
+        btn2000 = createButton("2.000.000");
+        btn3000 = createButton("3.000.000");
+        btn5000 = createButton("5.000.000");
+        btnenterAmount = createButton("Enter Amount");
+        btnexit = createButton("Exit");
     }
 
     private JButton createButton(String text) {
@@ -49,13 +49,13 @@ CashWithdrawUI extends JFrame {
         l1.setBounds(75, 50, 700, 50);
         add(l1);
 
-        addButton(b1, 50, 175);
-        addButton(b2, 50, 275);
-        addButton(b3, 50, 375);
-        addButton(b4, 400, 175);
-        addButton(b5, 400, 275);
-        addButton(b6, 400, 375);
-        addButton(b7, 400, 475);
+        addButton(btn500, 50, 175);
+        addButton(btn1000, 50, 275);
+        addButton(btn2000, 50, 375);
+        addButton(btn3000, 400, 175);
+        addButton(btn5000, 400, 275);
+        addButton(btnenterAmount, 400, 375);
+        addButton(btnexit, 400, 475);
     }
 
     private void addButton(JButton button, int x, int y) {
@@ -64,20 +64,20 @@ CashWithdrawUI extends JFrame {
     }
 
     private void addActionListeners() {
-        b1.addActionListener(createWithdrawListener(500000));
-        b2.addActionListener(createWithdrawListener(1000000));
-        b3.addActionListener(createWithdrawListener(2000000));
-        b4.addActionListener(createWithdrawListener(3000000));
-        b5.addActionListener(createWithdrawListener(5000000));
+        btn500.addActionListener(createWithdrawListener(500000));
+        btn1000.addActionListener(createWithdrawListener(1000000));
+        btn2000.addActionListener(createWithdrawListener(2000000));
+        btn3000.addActionListener(createWithdrawListener(3000000));
+        btn5000.addActionListener(createWithdrawListener(5000000));
 
-        b6.addActionListener(new ActionListener() {
+        btnenterAmount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 new EnterAmountUI(accountNumber,authToken).setVisible(true);  // Pass account number to EnterAmountUI
                 dispose();
             }
         });
 
-        b7.addActionListener(new ActionListener() {
+        btnexit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 new TransactionsUI(accountNumber,authToken).setVisible(true);  // Return to main transaction screen
                 dispose();
@@ -100,5 +100,6 @@ CashWithdrawUI extends JFrame {
         getContentPane().setBackground(Color.WHITE);
         setVisible(true);
     }
+
 
 }

@@ -40,16 +40,6 @@ public class ViewBalanceUI extends JFrame {
         accountNumberLabel.setBounds(350, 200, 200, 30);
         add(accountNumberLabel);
 
-        l3 = new JLabel("Full Name:");
-        l3.setFont(new Font("Arial", Font.PLAIN, 20));
-        l3.setBounds(150, 250, 150, 30);
-        add(l3);
-
-        fullNameLabel = new JLabel("Loading...");
-        fullNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        fullNameLabel.setBounds(350, 250, 200, 30);
-        add(fullNameLabel);
-
         l4 = new JLabel("Current Balance:");
         l4.setFont(new Font("Arial", Font.PLAIN, 20));
         l4.setBounds(150, 300, 150, 30);

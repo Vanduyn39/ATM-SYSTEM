@@ -54,8 +54,6 @@ public class TransactionConfirmationUI extends JFrame {
         JButton[] buttons = {confirmButton, exitButton};
         for (JButton button : buttons) {
             button.setFont(new Font("Arial", Font.BOLD, 24));
-            button.setBackground(Color.BLACK);
-            button.setForeground(Color.BLACK);
         }
     }
 

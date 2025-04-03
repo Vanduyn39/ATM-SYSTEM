@@ -12,8 +12,8 @@ import java.net.URL;
 
 public class PinChangeUI extends JFrame {
     private JLabel l1, l2, l3, l4;
-    private JTextField tf1, tf2, tf3;
-    private JButton b1, b2;
+    private JTextField currentPinText, newPinText, confirmPinText;
+    private JButton btnexit, btnchange;
     private String accountNumber;
     private String authToken;
 
@@ -40,23 +40,21 @@ public class PinChangeUI extends JFrame {
             label.setFont(new Font("Raleway", Font.BOLD, 24));
         }
 
-        tf1 = new JTextField(15);
-        tf2 = new JTextField(15);
-        tf3 = new JTextField(15);
+        currentPinText = new JTextField(15);
+        newPinText = new JTextField(15);
+        confirmPinText = new JTextField(15);
 
-        JTextField[] textFields = {tf1, tf2, tf3};
+        JTextField[] textFields = {currentPinText, newPinText, confirmPinText};
         for (JTextField textField : textFields) {
             textField.setFont(new Font("Arial", Font.BOLD, 24));
         }
 
-        b1 = new JButton("Exit");
-        b2 = new JButton("Change");
+        btnexit = new JButton("Exit");
+        btnchange = new JButton("Change");
 
-        JButton[] buttons = {b1, b2};
+        JButton[] buttons = {btnexit, btnchange};
         for (JButton button : buttons) {
             button.setFont(new Font("Arial", Font.BOLD, 24));
-            button.setBackground(Color.BLACK);
-            button.setForeground(Color.BLACK);
         }
     }
 
@@ -66,14 +64,14 @@ public class PinChangeUI extends JFrame {
         l1.setBounds(200, 50, 400, 40);
         add(l1);
 
-        addComponent(l2, 100, 100, tf1, 150, 150);
-        addComponent(l3, 100, 200, tf2, 150, 250);
-        addComponent(l4, 100, 300, tf3, 150, 350);
+        addComponent(l2, 100, 100, currentPinText, 150, 150);
+        addComponent(l3, 100, 200, newPinText, 150, 250);
+        addComponent(l4, 100, 300, confirmPinText, 150, 350);
 
-        b1.setBounds(300, 460, 150, 50);
-        b2.setBounds(500, 460, 150, 50);
-        add(b1);
-        add(b2);
+        btnexit.setBounds(300, 460, 150, 50);
+        btnchange.setBounds(500, 460, 150, 50);
+        add(btnexit);
+        add(btnchange);
     }
 
     private void addComponent(JLabel label, int lx, int ly, Component field, int fx, int fy) {
@@ -84,8 +82,8 @@ public class PinChangeUI extends JFrame {
     }
 
     private void addActionListeners() {
-        b1.addActionListener(e -> navigateToTransactions());
-        b2.addActionListener(e -> processPinChange(authToken));
+        btnexit.addActionListener(e -> navigateToTransactions());
+        btnchange.addActionListener(e -> processPinChange(authToken));
     }
 
     private void navigateToTransactions() {
@@ -94,9 +92,9 @@ public class PinChangeUI extends JFrame {
     }
 
     private void processPinChange(String authToken) {
-        String currentPin = tf1.getText();  // Mã PIN cũ
-        String newPin = tf2.getText();      // Mã PIN mới
-        String confirmPin = tf3.getText(); // Xác nhận mã PIN mới
+        String currentPin = currentPinText.getText();  // Mã PIN cũ
+        String newPin = newPinText.getText();      // Mã PIN mới
+        String confirmPin = confirmPinText.getText(); // Xác nhận mã PIN mới
 
         // Kiểm tra đầu vào
         if (currentPin.isEmpty() || newPin.isEmpty() || confirmPin.isEmpty()) {
@@ -132,6 +130,8 @@ public class PinChangeUI extends JFrame {
             int responseCode = conn.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 JOptionPane.showMessageDialog(null, "PIN changed successfully!");
+                new TransactionsUI(accountNumber,authToken).setVisible(true);
+                dispose();
             } else {
                 // Đọc lỗi từ API
                 try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "utf-8"))) {
